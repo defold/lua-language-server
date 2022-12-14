@@ -26,7 +26,7 @@ lm:source_set 'lpeglabel' {
 
 lm:source_set 'luafilesystem' {
     rootdir = '3rd',
-    includes = "luafilesystem/src",
+    includes = "bee.lua/3rd/lua",
     sources = "luafilesystem/src/*.c",
 }
 

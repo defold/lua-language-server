@@ -7,6 +7,9 @@ local luacheck = require "luacheck.check"
 local lcstages = require "luacheck.stages"
 local lcformat = require "luacheck.format"
 local lcfilter = require "luacheck.filter"
+local lcconfig = require "luacheck.config"
+local workspace = require "workspace"
+local fs = require "luacheck.fs"
 
 local function pprint(t)
     if type(t) ~= "table" then
@@ -18,7 +21,15 @@ local function pprint(t)
     end
 end
 
+local config = nil
+
 return function (uri, callback)
+    if not config then
+        local rootUri = (workspace.rootUri or ""):gsub("file://", "")
+        local path = fs.join(rootUri, ".luacheckrc")
+        local global_path = nil
+        config = lcconfig.load_config(path, global_path)
+    end
     local text = files.getText(uri)
     local report = luacheck(text)
     lcfilter.filter({report})

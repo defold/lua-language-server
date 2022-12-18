@@ -22,6 +22,7 @@ local function pprint(t)
 end
 
 local config = nil
+local config_stack = nil
 
 return function (uri, callback)
     if not config then
@@ -29,10 +30,15 @@ return function (uri, callback)
         local path = fs.join(rootUri, ".luacheckrc")
         local global_path = nil
         config = lcconfig.load_config(path, global_path)
+        config_stack = lcconfig.stack_configs({ config })
     end
     local text = files.getText(uri)
     local report = luacheck(text)
     lcfilter.filter({report})
+    local reports = { report }
+    local opts = { config_stack:get_options(uri) }
+    local stds = config_stack:get_stds()
+    lcfilter.filter(reports, opts, stds)
     for i,warning in ipairs(report.filtered_warnings) do
         local message = lcformat.get_message(warning)
         local start = ((warning.line - 1) * 10000) + warning.column - 1

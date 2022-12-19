@@ -41,6 +41,6 @@ lm:source_set 'code_format' {
                 return "NOT_SUPPORT_FILE_SYSTEM"
             end
         end)(),
-        flags = "-Wall -Werror -std=gnu99"
+        flags = "-Wall -Werror -std=c++11"
     }
 }

@@ -28,6 +28,12 @@ lm:source_set 'luafilesystem' {
     rootdir = '3rd',
     includes = "bee.lua/3rd/lua",
     sources = "luafilesystem/src/*.c",
+    linux = {
+        flags = "-g -Wall -Werror -D__STDC_LIMIT_MACROS",
+        defines = {
+            "__STDC_LIMIT_MACROS"
+        }
+    }
 }
 
 lm:executable "lua-language-server" {

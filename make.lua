@@ -29,7 +29,7 @@ lm:source_set 'luafilesystem' {
     includes = "bee.lua/3rd/lua",
     sources = "luafilesystem/src/*.c",
     linux = {
-        flags = "-g -Wall -Werror",
+        flags = "-g -Wall -Werror=format",
         defines = {
             "__STDC_LIMIT_MACROS",
             "_BSD_SOURCE"

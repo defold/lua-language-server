@@ -32,7 +32,7 @@ lm:source_set 'luafilesystem' {
         flags = "-g -Wall -Werror=format",
         defines = {
             "__STDC_LIMIT_MACROS",
-            "_POSIX_C_SOURCE"
+            "_BSD_SOURCE"
         }
     }
 }
